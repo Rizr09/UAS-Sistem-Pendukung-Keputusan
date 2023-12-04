@@ -29,9 +29,10 @@ def main():
         st.session_state.val_i = [0] * 9
     
     
-    weight = [0] * 9 # create a list of 8 zeros
-    impact = [0] * 9 # create a list of 8 zeros
+    weight = [0] * 9
+    impact = [0] * 9
     st.markdown("<h1 style='text-align: center; color: black;'><span style='color: #1DB954;'>Music</span> Recommendation System Using TOPSIS</h1>", unsafe_allow_html=True)    
+    st.markdown("<p style='text-align: center; color: black;'>by <b>Rizky Ramadhan Sudjarmono</b> (210004), <b>Ardes Zubka Putra</b> (210009), <b>Raditya Muhamad Lacavi</b> (210019), and <b>Akmal Azzary Megaputra</b> (210048) to fulfill the final exam of the Decision Support System class</p>", unsafe_allow_html=True)
     genre = st.sidebar.selectbox("What type of song do you want to listen to?", ['English', 'Indonesia', 'Japan', 'Korea'])
 
     st.sidebar.markdown("<h3 style='text-align: center; color: black;'>Select your <span style='text-decoration: underline; text-decoration-color: #1DB954;'>preferences</span></h3>", unsafe_allow_html=True)
@@ -87,7 +88,7 @@ def main():
         st.markdown("02:01")
         korea = pd.read_csv(f'data/Korea Trimmed.csv')
         sample = korea.iloc[[100]]
-        embed = re.compile(r'https://open.spotify.com/track/(\w+)').sub(r'https://open.spotify.com/embed/track/\1', sample['trackUrl'].values[0])
+        # embed = re.compile(r'https://open.spotify.com/track/(\w+)').sub(r'https://open.spotify.com/embed/track/\1', sample['trackUrl'].values[0])
         # iframe_code = f'<iframe style="border-radius:12px; background-color: transparent;" src="{embed}?utm_source=generator" width="100%" height="160" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
         # st.markdown(f"It's **{sample['trackName'].values[0]}** by **{sample['artistName'].values[0]}**")
         iframe_code = f'<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/00Coyxt9mTec1acC52qtWa?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
