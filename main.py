@@ -35,9 +35,7 @@ def main():
     genre = st.sidebar.selectbox("What type of song do you want to listen to?", ['English', 'Indonesia', 'Japan', 'Korea'])
 
     st.sidebar.markdown("<h3 style='text-align: center; color: black;'>Select your <span style='text-decoration: underline; text-decoration-color: #1DB954;'>preferences</span></h3>", unsafe_allow_html=True)
-    # create a list of the musical attributes and their emojis
     attributes = ["Acousticness🎻", "Danceability💃", "Energy⚡", "Instrumentalness🎼", "Liveness🎙️", "Loudness🔉", "Speechiness🗣️", "Tempo⏩", "Valence😊"]
-    # create a list of the descriptions for each attribute
     descriptions = [
         "A confidence measure whether the track is acoustic. 10 represents high confidence the track is acoustic.",
         "How suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. 10 represents high confidence the track is danceable.",
@@ -86,11 +84,13 @@ def main():
     if st.session_state.searched == False:
         st.markdown("<h4 style='text-align: center; color: black;'>↖️ You haven't searched for a song yet, head to the sidebar</h4>", unsafe_allow_html=True)
         st.markdown("<h4 style='text-align: center; color: black;'>How about recommendation of the day 👇</h4>", unsafe_allow_html=True)
+        st.markdown("02:01")
         korea = pd.read_csv(f'data/Korea Trimmed.csv')
         sample = korea.iloc[[100]]
         embed = re.compile(r'https://open.spotify.com/track/(\w+)').sub(r'https://open.spotify.com/embed/track/\1', sample['trackUrl'].values[0])
-        iframe_code = f'<iframe style="border-radius:12px; background-color: transparent;" src="{embed}?utm_source=generator" width="100%" height="160" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
-        st.markdown(f"It's **{sample['trackName'].values[0]}** by **{sample['artistName'].values[0]}**")
+        # iframe_code = f'<iframe style="border-radius:12px; background-color: transparent;" src="{embed}?utm_source=generator" width="100%" height="160" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+        # st.markdown(f"It's **{sample['trackName'].values[0]}** by **{sample['artistName'].values[0]}**")
+        iframe_code = f'<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/00Coyxt9mTec1acC52qtWa?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
         st.markdown(iframe_code, unsafe_allow_html=True)
     else :
         data = pd.read_csv(f'data/{genre}.csv')
