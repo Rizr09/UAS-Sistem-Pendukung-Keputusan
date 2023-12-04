@@ -10,16 +10,14 @@ def display_recommendation(iframe_code, percentage):
     st.markdown(iframe_code, unsafe_allow_html=True)
 
 def main():
-    weight = [0] * 8 # create a list of 8 zeros
-    impact = [0] * 8 # create a list of 8 zeros
-    st.markdown("<h1 style='text-align: center; color: black;'><span style='color: #1DB954;'>Music</span> Recommendation System Using TOPSIS</h1>", unsafe_allow_html=True)
-    
-    # st.sidebar.markdown(ui.select("What type of song do you want to listen to?", ['English', 'Indonesian', 'Korean']))
-    genre = st.sidebar.selectbox("What type of song do you want to listen to?", ['English', 'Indonesia', 'Korea'])
+    weight = [0] * 9 # create a list of 8 zeros
+    impact = [0] * 9 # create a list of 8 zeros
+    st.markdown("<h1 style='text-align: center; color: black;'><span style='color: #1DB954;'>Music</span> Recommendation System Using TOPSIS</h1>", unsafe_allow_html=True)    
+    genre = st.sidebar.selectbox("What type of song do you want to listen to?", ['English', 'Indonesia', 'Japan', 'Korea'])
 
     st.sidebar.markdown("<h3 style='text-align: center; color: black;'>Select your <span style='text-decoration: underline; text-decoration-color: #1DB954;'>preferences</span></h3>", unsafe_allow_html=True)
     # create a list of the musical attributes and their emojis
-    attributes = ["Acousticness🎻", "Danceability💃", "Energy⚡", "Instrumentalness🎼", "Liveness🎙️", "Loudness🔉", "Speechiness🗣️", "Tempo⏩"]
+    attributes = ["Acousticness🎻", "Danceability💃", "Energy⚡", "Instrumentalness🎼", "Liveness🎙️", "Loudness🔉", "Speechiness🗣️", "Tempo⏩", "Valence😊"]
     # create a list of the descriptions for each attribute
     descriptions = [
         "A confidence measure whether the track is acoustic. 10 represents high confidence the track is acoustic.",
@@ -29,20 +27,17 @@ def main():
         "Detects the presence of an audience in the recording. 10 represents high confidence the track is live.",
         "The overall loudness of a track in decibels (dB). 10 represents high confidence the track is loud.",
         "Detects the presence of spoken words in a track. 10 represents high confidence the track contains no speech.",
-        "The overall estimated tempo of a track in beats per minute (BPM). 10 represents high confidence the track is fast."
+        "The overall estimated tempo of a track in beats per minute (BPM). 10 represents high confidence the track is fast.",
+        "Describing the musical positiveness conveyed by a track. 10 represents high confidence the track is positive."
     ]
-    # use a loop to iterate over the attributes and their descriptions
+
     for i in range(len(attributes)):
-        # display the attribute name and emoji
         st.sidebar.markdown(f"<h4 style='color: #1DB954; font-weight: bold;'>{attributes[i]}</h4>", unsafe_allow_html=True)
-        # display the attribute description and slider
         weight[i] = st.sidebar.slider(descriptions[i], -10, 10, 0)
-        # determine the impact based on the weight sign
         impact[i] = 1 if weight[i] >= 0 else 0
-        # take the absolute value of the weight
         weight[i] = abs(weight[i])
 
-    if st.sidebar.button("Search") and all([i != 0 for i in weight]):
+    if st.sidebar.button("Search") and weight != [0] * 9:
         data = pd.read_csv(f'data/{genre}.csv')
         topsis = Topsis(data, weight, impact)
         topsis.run()
