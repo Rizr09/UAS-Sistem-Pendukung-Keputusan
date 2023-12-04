@@ -83,7 +83,7 @@ def main():
         st.session_state.searched = True
 
     if st.session_state.searched == False:
-        st.markdown("<h4 style='text-align: center; color: black;'>You haven't searched for a song yet, head to the sidebar!</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='text-align: center; color: black;'>↖️ You haven't searched for a song yet, head to the sidebar!</h4>", unsafe_allow_html=True)
         st.markdown("<h4 style='text-align: center; color: black;'>How about recommendation of the day 👇</h4>", unsafe_allow_html=True)
         st.markdown("02:01")
         korea = pd.read_csv(f'data/Korea Trimmed.csv')
