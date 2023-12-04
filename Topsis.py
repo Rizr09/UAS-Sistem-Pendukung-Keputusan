@@ -12,7 +12,8 @@ class Topsis:
             'trackFeatureLiveness': 'liveness',
             'trackFeatureLoudness': 'loudness',
             'trackFeatureSpeechiness': 'speechiness',
-            'trackFeatureTempo': 'tempo'
+            'trackFeatureTempo': 'tempo',
+            'trackFeatureValence': 'valence'
         }
         self.weights = weights
         self.impacts = impacts
@@ -37,7 +38,7 @@ class Topsis:
                 self.negativeIdeal[value] = self.data[value + 'Normalized'].max()
     
     def separationMeasures(self) -> None:
-        for key, value in self.features.items():
+        for _, value in self.features.items():
             self.data[value + 'SeparationMeasureIdeal'] = pow(self.data[value + 'Normalized'] - self.ideal[value], 2)
             self.data[value + 'SeparationMeasureNegativeIdeal'] = pow(self.data[value + 'Normalized'] - self.negativeIdeal[value], 2)
         
